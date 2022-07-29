@@ -26,7 +26,6 @@ class Menu extends Component {
             showFormMenu: false,
         });
     };
-
     handleId = (event) => {
         if (event.target.value !== '') {
             this.setState({
