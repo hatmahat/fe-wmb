@@ -103,13 +103,28 @@ class Menu extends Component {
             }
         }
     };
+    handleDelete = (index) => {
+        this.state.menus.splice(index, 1)
+        this.setState({
+            menus: this.state.menus,
+        });
+    };
     render() {
-        let menuItems = this.state.menus.map((menuItems) => {
+        let menuItems = this.state.menus.map((menuItems, index) => {
             return (
                 <tr>
                     <td>{menuItems.id}</td>
                     <td>{menuItems.name}</td>
                     <td>{menuItems.price}</td>
+                    <td>
+                        <button
+                            onClick={() => this.handleDelete(index)}
+                            type="button"
+                            className="btn btn-danger"
+                        >
+                            DELETE
+                        </button>
+                    </td>
                 </tr>
             );
         });
@@ -149,6 +164,7 @@ class Menu extends Component {
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Harga</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>{menuItems}</tbody>

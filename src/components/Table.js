@@ -11,6 +11,7 @@ class Table extends Component {
             id: '',
             isAvailable: '',
             errorId: '',
+            errorIsAvailable: '',
         };
     }
     handleFormTable = () => {
@@ -41,7 +42,17 @@ class Table extends Component {
     handleIsStatus = (event) => {
         if (event.target.value !== '') {
             this.setState({
-                isAvailable: event.target.value === 'Available' ? true : false,
+                isAvailable:
+                    event.target.value === 'Available'
+                        ? true
+                        : event.target.value === 'Unavailable'
+                        ? false
+                        : '',
+                errorIsAvailable: '',
+            });
+        } else {
+            this.setState({
+                errorIsAvailable: 'required field',
             });
         }
         console.log(this.state.isAvailable);
@@ -64,12 +75,24 @@ class Table extends Component {
                     errorId: 'required field',
                 });
             }
+            if (this.state.isAvailable === '') {
+                this.setState({
+                    errorIsAvailable: 'required field',
+                });
+            }
         }
     };
+    handleDelete = (index) => {
+        this.state.tables.splice(index, 1);
+        this.setState({
+            tables: this.state.tables,
+        });
+    };
     render() {
-        let tableItems = this.state.tables.map((tableItem) => {
+        let tableItems = this.state.tables.map((tableItem, index) => {
             return (
                 <tr>
+                    <td>{index + 1}</td>
                     <td>{tableItem.id}</td>
                     <td>
                         {tableItem.isAvailable ? (
@@ -77,6 +100,15 @@ class Table extends Component {
                         ) : (
                             <text className="unavailable">Unavailable</text>
                         )}
+                    </td>
+                    <td>
+                        <button
+                            onClick={() => this.handleDelete(index)}
+                            type="button"
+                            className="btn btn-danger"
+                        >
+                            DELETE
+                        </button>
                     </td>
                 </tr>
             );
@@ -99,6 +131,7 @@ class Table extends Component {
                             handleSubmit={this.handleSubmit}
                             cancel={this.handleCancel}
                             errorId={this.state.errorId}
+                            errorIsAvailable={this.state.errorIsAvailable}
                         />
                     ) : (
                         <></>
@@ -110,8 +143,10 @@ class Table extends Component {
                 >
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>Table ID</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>{tableItems}</tbody>

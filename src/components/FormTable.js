@@ -20,7 +20,7 @@ class FormTable extends Component {
         this.setState({
             isAvai: event.target.value
         })
-        console.log(this.state.isAvai)
+        console.log('dari form ' + this.state.isAvai)
         this.props.handleIsStatus(event);
     };
 
@@ -45,6 +45,8 @@ class FormTable extends Component {
                         <option value="Available">Available</option>
                         <option value="Unavailable">Unavailable</option>
                     </select>
+                    <br />
+                    <small className="error">{this.props.errorIsAvailable}</small>
                 </form>
                 <br />
                 <button
