@@ -11,6 +11,8 @@ class LoginForm extends Component {
             password: '',
             errorEmail: '',
             errorPassword: '',
+            notEmptyEmail: false,
+            notEmptyPassword: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -31,6 +33,7 @@ class LoginForm extends Component {
         } else {
             this.setState({
                 errorEmail: '',
+                notEmptyEmail: true,
             });
         }
     };
@@ -47,21 +50,30 @@ class LoginForm extends Component {
         } else {
             this.setState({
                 errorPassword: '',
+                notEmptyPassword: true,
             });
         }
     };
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.errorPassword === '' && this.state.errorEmail === '') {
-            alert(
-                `SUCCESS!\nEmail: ${this.state.email}\nPassword: ${this.state.password}`
-            );
+        if (
+            this.state.errorPassword === '' &&
+            this.state.errorEmail === '' &&
+            this.state.notEmptyEmail &&
+            this.state.notEmptyPassword
+        ) {
+            // alert(
+            //     `SUCCESS!\nEmail: ${this.state.email}\nPassword: ${this.state.password}`
+            // );
+            this.props.func();
+        } else {
+            this.handleChangeEmail(event);
+            this.handleChangePassword(event);
         }
-        this.props.func();
     };
     render() {
         return (
-            <div>
+            <div className="body">
                 <div className="flex-container">
                     <div className="login-container">
                         <div className="login-form">
@@ -106,6 +118,7 @@ class LoginForm extends Component {
                                         </small>
                                     </label>
                                 </div>
+                                <br />
                                 <button
                                     variant="primary"
                                     type="submit"

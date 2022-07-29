@@ -1,4 +1,4 @@
-body {
+.body {
     height: 100%;
     width: 100%;
     margin: 0;
@@ -32,7 +32,7 @@ body {
 }
 
 .login-container {
-    height: 250px;
+    height: 350;
     width: 300px;
     background-color: rgba(245, 245, 245, 0.9);
     border: 2px solid rgb(255, 255, 255);
