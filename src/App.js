@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { PropTypes } from 'react';
 import './App.css';
 import LoginForm from './components/Login';
 import Dashboard from './components/Dasboard';
