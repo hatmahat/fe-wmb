@@ -6,6 +6,13 @@ class Menu extends Component {
         super(props);
         this.state = {
             showFormMenu: false,
+            menus: this.props.menus,
+            id: '',
+            name: '',
+            price: '',
+            errorId: '',
+            errorName: '',
+            errorPrice: '',
         };
     }
     handleFormMenu = () => {
@@ -18,9 +25,87 @@ class Menu extends Component {
         this.setState({
             showFormMenu: false,
         });
-    }
+    };
+
+    handleId = (event) => {
+        if (event.target.value !== '') {
+            this.setState({
+                id: event.target.value,
+                errorId: '',
+            });
+        } else {
+            this.setState({
+                id: event.target.value,
+                errorId: 'required field',
+            });
+        }
+        console.log(this.state.id);
+    };
+    handleName = (event) => {
+        if (event.target.value !== '') {
+            this.setState({
+                name: event.target.value,
+                errorName: '',
+            });
+        } else {
+            this.setState({
+                name: event.target.value,
+                errorName: 'required field',
+            });
+        }
+        console.log(this.state.name);
+    };
+    handlePrice = (event) => {
+        if (event.target.value !== '') {
+            this.setState({
+                price: event.target.value,
+                errorPrice: '',
+            });
+        } else {
+            this.setState({
+                price: event.target.value,
+                errorPrice: 'required field',
+            });
+        }
+        console.log(this.state.price);
+    };
+    handleSubmitTambah = (event) => {
+        event.preventDefault();
+        if (
+            this.state.id !== '' &&
+            this.state.name !== '' &&
+            this.state.price !== ''
+        ) {
+            const newMenu = {
+                id: this.state.id,
+                name: this.state.name,
+                price: this.state.price,
+            };
+            this.state.menus.push(newMenu);
+            this.setState({
+                menus: this.state.menus,
+            });
+            console.log(this.state.menus);
+        } else {
+            if (this.state.id === '') {
+                this.setState({
+                    errorId: 'required field',
+                });
+            }
+            if (this.state.name === '') {
+                this.setState({
+                    errorName: 'required field',
+                });
+            }
+            if (this.state.price === '') {
+                this.setState({
+                    errorPrice: 'required field',
+                });
+            }
+        }
+    };
     render() {
-        let menuItems = this.props.menus.map((menuItems) => {
+        let menuItems = this.state.menus.map((menuItems) => {
             return (
                 <tr>
                     <td>{menuItems.id}</td>
@@ -39,8 +124,22 @@ class Menu extends Component {
                     Tambah Menu
                 </button>
                 <div>
-                    {/* form menu muncul disini*/}
-                    {this.state.showFormMenu ? <FormMenu cancel={this.handleCancel}/> : <></>}
+                    <br />
+                    {this.state.showFormMenu ? (
+                        <FormMenu
+                            handleId={this.handleId}
+                            handleName={this.handleName}
+                            handlePrice={this.handlePrice}
+                            handleSubmit={this.handleSubmitTambah}
+                            menus={this.state.menus}
+                            cancel={this.handleCancel}
+                            errorId={this.state.errorId}
+                            errorName={this.state.errorName}
+                            errorPrice={this.state.errorPrice}
+                        />
+                    ) : (
+                        <></>
+                    )}
                 </div>
                 <table
                     style={{ textAlign: 'center' }}

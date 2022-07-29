@@ -67,8 +67,23 @@ class LoginForm extends Component {
             // );
             this.props.func();
         } else {
-            this.handleChangeEmail(event);
-            this.handleChangePassword(event);
+            const passwordReq = this.state.password.length >= 6;
+            if (!passwordReq) {
+                this.setState({
+                    errorPassword:
+                        'Password must contain at least 6 characters!',
+                });
+            }
+            const emailReq = this.state.email
+                .toLowerCase()
+                .match(
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+            if (!emailReq) {
+                this.setState({
+                    errorEmail: 'Email is not valid!',
+                });
+            }
         }
     };
     render() {
