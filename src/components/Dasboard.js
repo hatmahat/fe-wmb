@@ -21,12 +21,17 @@ class Dashboard extends Component {
             showMenu: false,
         };
     }
-    handelMenu = () => {
+    handleMenu = () => {
         this.setState({
             showMenu: true,
         });
-        console.log("SSS", this.state.showMenu)
+        console.log('SSS', this.state.showMenu);
     };
+    handleHome = () => {
+        this.setState({
+            showMenu: false,
+        });
+    }
     logout = () => {
         this.props.func();
     };
@@ -35,23 +40,36 @@ class Dashboard extends Component {
             <>
                 <NavbarBS bg="dark" variant="dark" expand="lg">
                     <Container>
-                        <NavbarBS.Brand href="#home">Dashboard</NavbarBS.Brand>
+                        <NavbarBS.Brand onClick={this.handleHome}>
+                            Dashboard Bakari
+                        </NavbarBS.Brand>
                         <NavbarBS.Toggle aria-controls="basic-navbar-nav" />
                         <NavbarBS.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link onClick={this.handelMenu}>
+                                <Nav.Link onClick={this.handleMenu}>
                                     Menu
                                 </Nav.Link>
                                 <Nav.Link>Table</Nav.Link>
-                                <Nav.Link onClick={this.logout}>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={this.logout} // ke page tambah menu
+                                >
                                     Logout
-                                </Nav.Link>
+                                </button>
                             </Nav>
                         </NavbarBS.Collapse>
                     </Container>
                 </NavbarBS>
                 <div>
-                    {this.state.showMenu ? <Menu menus={this.state.menus} /> : <h1>Welcome! Please select on the navbar to continue</h1>}
+                    {this.state.showMenu ? (
+                        <Menu menus={this.state.menus} />
+                    ) : (
+                        <h1>
+                            Welcome to WMB! Please select on the navbar to
+                            continue
+                        </h1>
+                    )}
                 </div>
             </>
         );

@@ -123,6 +123,7 @@ class LoginForm extends Component {
                                     variant="primary"
                                     type="submit"
                                     value="submit"
+                                    className="btn btn-primary"
                                 >
                                     Login
                                 </button>
