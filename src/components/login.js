@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './login.css';
-import { BsFillLockFill } from "react-icons/bs";
+import { BsFillLockFill } from 'react-icons/bs';
 // import Button from 'react-bootstrap/Button';
 
 class LoginForm extends Component {
@@ -12,6 +12,7 @@ class LoginForm extends Component {
             errorEmail: '',
             errorPassword: '',
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChangeEmail = (event) => {
         let email = event.target.value;
@@ -56,6 +57,7 @@ class LoginForm extends Component {
                 `SUCCESS!\nEmail: ${this.state.email}\nPassword: ${this.state.password}`
             );
         }
+        this.props.func();
     };
     render() {
         return (
@@ -64,8 +66,7 @@ class LoginForm extends Component {
                     <div className="login-container">
                         <div className="login-form">
                             <h2 className="login-header">
-                                <BsFillLockFill />{' '}
-                                Login Page
+                                <BsFillLockFill /> Login Page
                             </h2>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="login-form-item">
