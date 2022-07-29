@@ -9,6 +9,28 @@ class App extends Component {
         super(props);
         this.state = {
             login: false,
+            menus: [
+              {
+                  id: 'M001',
+                  name: 'Nasi Goreng',
+                  price: '15.000',
+              },
+              {
+                  id: 'M002',
+                  name: 'Mie Goreng',
+                  price: '17.000',
+              },
+          ],
+          tables: [
+              {
+                  id: 'T001',
+                  isAvailable: true,
+              },
+              {
+                  id: 'T002',
+                  isAvailable: false,
+              },
+          ],
         };
     }
 
@@ -30,7 +52,7 @@ class App extends Component {
             <>
                 {/* <Dashboard /> */}
                 {this.state.login ? (
-                    <Dashboard func={this.logout} />
+                    <Dashboard menus={this.state.menus} tables={this.state.tables} func={this.logout} />
                 ) : (
                     <LoginForm func={this.loginSuccess} />
                 )}

@@ -7,28 +7,30 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            menus: [
-                {
-                    id: 'M001',
-                    name: 'Nasi Goreng',
-                    price: '15.000',
-                },
-                {
-                    id: 'M002',
-                    name: 'Mie Goreng',
-                    price: '17.000',
-                },
-            ],
-            tables: [
-                {
-                    id: 'T001',
-                    isAvailable: true,
-                },
-                {
-                    id: 'T002',
-                    isAvailable: false,
-                },
-            ],
+            // menus: [
+            //     {
+            //         id: 'M001',
+            //         name: 'Nasi Goreng',
+            //         price: '15.000',
+            //     },
+            //     {
+            //         id: 'M002',
+            //         name: 'Mie Goreng',
+            //         price: '17.000',
+            //     },
+            // ],
+            // tables: [
+            //     {
+            //         id: 'T001',
+            //         isAvailable: true,
+            //     },
+            //     {
+            //         id: 'T002',
+            //         isAvailable: false,
+            //     },
+            // ],
+            menus: this.props.menus,
+            tables: this.props.tables,
             showMenu: false,
             showTable: false,
         };

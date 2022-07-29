@@ -59,7 +59,7 @@ class Table extends Component {
     };
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.id !== '') {
+        if (this.state.id !== '' && this.state.errorIsAvailable === '') {
             const newTable = {
                 id: this.state.id,
                 isAvailable: this.state.isAvailable,
